@@ -12,6 +12,7 @@ export default function Home() {
         loadBudgets();
     },[]);
 
+    // loding Budget entity data
     const loadBudgets = async() => {
         const result = await axios.get("http://localhost:9812/api/v1/budgets");
         setBudgets(result.data);
