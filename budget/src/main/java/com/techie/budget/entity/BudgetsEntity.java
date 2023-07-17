@@ -17,11 +17,11 @@ public class BudgetsEntity {
     @Column(nullable = false)
     private BigDecimal income;
     @Column
-    private BigDecimal fiftyPercentAmount;
+    private BigDecimal needsPercentageAmount;
     @Column
-    private BigDecimal thirtyPercentAmount;
+    private BigDecimal wantsPercentageAmount;
     @Column
-    private BigDecimal twentyPercentAmount;
+    private BigDecimal savingsPercentageAmount;
     @Column
     private String expenses;
     @Column

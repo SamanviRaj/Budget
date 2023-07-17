@@ -61,7 +61,8 @@ public class BudgetServiceImpl implements BudgetService {
 
     private String convertExpensesObjecttoString(BudgetsRequest budgetsRequest){
         StringBuilder sb = new StringBuilder(128);
-        if(budgetsRequest.getExpenses().length > 0) {
+        if( null != budgetsRequest.getExpenses()) {
+            if(budgetsRequest.getExpenses().length > 0){
             int length = budgetsRequest.getExpenses().length;
             sb.append(BRAKET_OPEN);
             for (Expense e : budgetsRequest.getExpenses()) {
@@ -72,6 +73,7 @@ public class BudgetServiceImpl implements BudgetService {
                 }
             }
             sb.append(BRAKET_CLOSE);
+        }
         }
         System.out.println("!!!!! budget Expenses request "+sb.toString());
         return sb.toString();
@@ -84,12 +86,14 @@ public class BudgetServiceImpl implements BudgetService {
         BigDecimal twentyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.2"));
         BigDecimal expenseSum = new BigDecimal(0);
 
-        budgetsEntity.setFiftyPercentAmount(fiftyPercent);
-        budgetsEntity.setThirtyPercentAmount(thirtyPercent);
-        budgetsEntity.setTwentyPercentAmount(twentyPercent);
+        budgetsEntity.setNeedsPercentageAmount(fiftyPercent);
+        budgetsEntity.setWantsPercentageAmount(thirtyPercent);
+        budgetsEntity.setSavingsPercentageAmount(twentyPercent);
 
-        for (Expense e: budgetsRequest.getExpenses()) {
-            expenseSum = e.getExpenseAmount().add(expenseSum);
+        if(null != budgetsRequest.getExpenses()) {
+            for (Expense e : budgetsRequest.getExpenses()) {
+                expenseSum = e.getExpenseAmount().add(expenseSum);
+            }
         }
 
         budgetsEntity.setExpenseTotal(expenseSum);

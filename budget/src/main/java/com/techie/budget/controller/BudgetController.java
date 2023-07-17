@@ -22,7 +22,8 @@ public class BudgetController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<BudgetsEntity> createBudget(@RequestBody BudgetsRequest budgetsRequest) throws Exception {
+    public ResponseEntity<BudgetsEntity> create(@RequestBody BudgetsRequest budgetsRequest) throws Exception {
+        System.out.println("called for creating budget");
         return new ResponseEntity<>(budgetService.createBudget(budgetsRequest), HttpStatus.CREATED);
     }
     @GetMapping("{id}")
