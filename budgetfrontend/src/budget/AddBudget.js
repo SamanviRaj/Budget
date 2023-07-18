@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../api/axiosConfig";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,21 +7,22 @@ import { Link, useNavigate } from "react-router-dom";
 export default function AddBudget() {
   let navigate = useNavigate();
 
-  const [user, setUser] = useState({
-    income: "",
+  const [income, setIncome] = useState('');
+  
+  const [budget, setBudget] = useState({
     username: "",
     email: "",
   });
 
-  const { income, username, email } = user;
+  const { username, email } = budget;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setBudget({ ...budget, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:9812/api/v1/budgets/create", user);
+    await axios.post("http://localhost:9812/api/v1/budgets/create", budget);
     navigate("/");
   };
 
@@ -39,9 +41,9 @@ export default function AddBudget() {
                 type={"number"}
                 className="form-control"
                 placeholder="Enter your Income"
-                name="Income"
+                name="income"
                 value={income}
-                onChange={(e) => onInputChange(e)}
+                onChange={e => setIncome(e.target.value)}
               />
             </div>
 
