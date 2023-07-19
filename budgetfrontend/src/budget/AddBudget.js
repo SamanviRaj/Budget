@@ -22,11 +22,21 @@ export default function AddBudget() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:9812/api/v1/budgets/create", income,{
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
+    const budget={income}
+    // await axios.post("http://localhost:9812/api/v1/budgets/create", income,{
+    //   headers: {
+    //     'content-type': 'application/json'
+    //   }
+    // });
+
+      fetch("http://localhost:9812/api/v1/budgets/create",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(budget)
+
+    }).then(()=>{
+      console.log("New Budget added")
+    })
     navigate("/");
   };
 
@@ -47,7 +57,7 @@ export default function AddBudget() {
                 placeholder="Enter your Income"
                 name="income"
                 value={income}
-                onChange={e => parseInt(setIncome(e.target.value))}
+                onChange={(e)=>parseInt(setIncome(e.target.value))}
               />
             </div>
 
