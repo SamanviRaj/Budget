@@ -22,7 +22,11 @@ export default function AddBudget() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:9812/api/v1/budgets/create", budget);
+    await axios.post("http://localhost:9812/api/v1/budgets/create", income,{
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
     navigate("/");
   };
 
@@ -43,7 +47,7 @@ export default function AddBudget() {
                 placeholder="Enter your Income"
                 name="income"
                 value={income}
-                onChange={e => setIncome(e.target.value)}
+                onChange={e => parseInt(setIncome(e.target.value))}
               />
             </div>
 
