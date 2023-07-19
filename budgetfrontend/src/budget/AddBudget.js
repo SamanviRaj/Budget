@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function AddBudget() {
   let navigate = useNavigate();
 
-  const [income, setIncome] = useState('');
+  const [income, setIncome] = useState(0);
   
   const [budget, setBudget] = useState({
     username: "",
@@ -57,7 +57,7 @@ export default function AddBudget() {
                 placeholder="Enter your Income"
                 name="income"
                 value={income}
-                onChange={(e)=>parseInt(setIncome(e.target.value))}
+                onChange={(e)=>setIncome(parseInt(e.target.value))}
               />
             </div>
 
