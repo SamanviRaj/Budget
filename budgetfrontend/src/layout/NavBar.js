@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useParams } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -9,7 +10,7 @@ export default function NavBar() {
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>       
-            <button type="button" className="btn btn-primary">ADD Budget</button>
+            <Link to="/addbudget" className="btn btn-btn-outline-primary">ADD Budget</Link>
         </nav>
     </div>
   )

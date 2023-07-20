@@ -81,22 +81,25 @@ public class BudgetServiceImpl implements BudgetService {
 
     private void budgetCalculations(BudgetsRequest budgetsRequest, BudgetsEntity budgetsEntity) throws Exception {
 
-        BigDecimal fiftyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.5"));
-        BigDecimal thirtyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.3"));
-        BigDecimal twentyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.2"));
-        BigDecimal expenseSum = new BigDecimal(0);
+        if(null != budgetsRequest.getIncome()) {
 
-        budgetsEntity.setNeedsPercentageAmount(fiftyPercent);
-        budgetsEntity.setWantsPercentageAmount(thirtyPercent);
-        budgetsEntity.setSavingsPercentageAmount(twentyPercent);
+            BigDecimal fiftyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.5"));
+            BigDecimal thirtyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.3"));
+            BigDecimal twentyPercent = budgetsRequest.getIncome().multiply(new BigDecimal("0.2"));
+            BigDecimal expenseSum = new BigDecimal(0);
 
-        if(null != budgetsRequest.getExpenses()) {
-            for (Expense e : budgetsRequest.getExpenses()) {
-                expenseSum = e.getExpenseAmount().add(expenseSum);
+            budgetsEntity.setNeedsPercentageAmount(fiftyPercent);
+            budgetsEntity.setWantsPercentageAmount(thirtyPercent);
+            budgetsEntity.setSavingsPercentageAmount(twentyPercent);
+
+            if (null != budgetsRequest.getExpenses()) {
+                for (Expense e : budgetsRequest.getExpenses()) {
+                    expenseSum = e.getExpenseAmount().add(expenseSum);
+                }
             }
-        }
 
-        budgetsEntity.setExpenseTotal(expenseSum);
+            budgetsEntity.setExpenseTotal(expenseSum);
+        }
     }
 
     public List<Expense> convertExpensesObjecttoList(BudgetsRequest budgetsRequest) throws Exception {
